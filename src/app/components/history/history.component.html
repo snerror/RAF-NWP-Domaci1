@@ -1,0 +1,18 @@
+<div>
+  <table class="table">
+    <thead>
+    <tr>
+      <td>Time</td>
+      <td>Method</td>
+      <td>Text</td>
+    </tr>
+    </thead>
+    <tbody *ngFor="let h of history">
+    <tr>
+      <td>[{{ h.time }}]</td>
+      <td>{{ h.method }}</td>
+      <td>{{ h.text }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

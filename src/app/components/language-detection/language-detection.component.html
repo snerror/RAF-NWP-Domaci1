@@ -1,0 +1,38 @@
+<div>
+  <form (submit)="submit()">
+    <textarea
+      class="form-control mb-3"
+      [(ngModel)]="text"
+      [ngModelOptions]="{standalone:true}"
+      required
+      rows="3"
+    ></textarea>
+    <div class="mb-3">
+      <input type="checkbox" id="clean" name="clean" [(ngModel)]="clean">
+      <label for="clean" class="ms-2">Clean</label>
+    </div>
+    <div class="mb-5">
+      <Button type="submit" class="btn btn-primary" [disabled]="isButtonDisabled()">Submit</Button>
+    </div>
+  </form>
+  <div *ngIf="result">
+    <h3>Detected languages are:</h3>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Language</th>
+        <th>Confidence</th>
+      </tr>
+      </thead>
+      <tbody *ngFor="let l of result.detectedLangs">
+      <tr>
+        <td>{{ l.lang }}</td>
+        <td>{{ l.confidence }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="text-danger mt-3">
+    {{ errorMessage }}
+  </div>
+</div>

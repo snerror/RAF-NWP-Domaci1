@@ -1,0 +1,43 @@
+<div>
+  <form (submit)="submit()">
+    <textarea
+      class="form-control mb-3"
+      [(ngModel)]="text"
+      [ngModelOptions]="{standalone:true}"
+      required
+      rows="3"
+    ></textarea>
+    <div class="mb-3">
+      <label for="id-lang" class="me-3">Languages</label>
+      <select name="lang" id="id-lang" [(ngModel)]="lang">
+        <option value=""></option>
+        <option value="auto">Auto</option>
+        <option value="en">English</option>
+        <option value="it">Italian</option>
+      </select>
+    </div>
+    <div class="mb-5">
+      <Button type="submit" class="btn btn-primary" [disabled]="isButtonDisabled()">Submit</Button>
+    </div>
+  </form>
+  <div *ngIf="result">
+    <h3>Results:</h3>
+    <table class="table">
+      <thead>
+      <tr>
+        <td>Score</td>
+        <td>Type</td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>{{ result.sentiment.score }}</td>
+        <td [style.color]="colorInterpolation(result.sentiment.score)">{{ result.sentiment.type }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="text-danger mt-3">
+    {{ errorMessage }}
+  </div>
+</div>

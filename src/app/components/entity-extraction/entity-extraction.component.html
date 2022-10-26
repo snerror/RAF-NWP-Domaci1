@@ -1,0 +1,74 @@
+<div>
+  <h3>Entity Extraction</h3>
+  <form (submit)="submitEntityExtraction()" class="d-flex flex-column">
+    <textarea
+      class="form-control mb-5"
+      [(ngModel)]="text"
+      [ngModelOptions]="{standalone:true}"
+      required
+      rows="3"
+    ></textarea>
+    <div class="mb-5 d-flex justify-content-between">
+      <div class="d-flex justify-content-center">
+        More Tags
+        <input
+          type="range"
+          name="min_confidence"
+          value="0.5"
+          [(ngModel)]="minConfidence"
+          id="id_min_confidence"
+          class="rangeinput mx-3"
+          max="1"
+          step="0.1"
+          min="0"
+          required
+        >
+        More Precision
+      </div>
+      <div>
+        <div>
+          <input type="checkbox" id="image" name="image" (click)="onIncludesClick('image')">
+          <label for="image">Image</label>
+        </div>
+        <div>
+          <input type="checkbox" id="abstract" name="abstract" (click)="onIncludesClick('abstract')">
+          <label for="abstract">Abstract</label>
+        </div>
+        <div>
+          <input type="checkbox" id="categories" name="categories" (click)="onIncludesClick('categories')">
+          <label for="categories">Categories</label>
+        </div>
+      </div>
+    </div>
+    <div>
+      <Button type="submit" class="btn btn-primary" [disabled]="isButtonDisabled()">Submit</Button>
+    </div>
+  </form>
+  <div class="my-5" *ngIf="result && result.annotations.length === 0">
+    <p>No results found</p>
+  </div>
+  <div class="my-5" *ngIf="result && result.annotations.length > 0">
+    <hr>
+    <table class="table">
+      <thead>
+      <th>Label</th>
+      <th>Confidence</th>
+      <th *ngIf="result.annotations[0].abstract">Abstract</th>
+      <th *ngIf="result.annotations[0].categories">Categories</th>
+      <th *ngIf="result.annotations[0].image">Image</th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let annotation of result.annotations">
+        <td>{{ annotation.label }}</td>
+        <td>{{ annotation.confidence }}</td>
+        <td *ngIf="annotation.abstract">{{ annotation.abstract }}</td>
+        <td *ngIf="annotation.categories">{{ annotation.categories }}</td>
+        <td *ngIf="annotation.image"><img src="{{ annotation.image.thumbnail }}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="text-danger mt-3">
+    {{ errorMessage }}
+  </div>
+</div>

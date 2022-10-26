@@ -1,0 +1,29 @@
+<div>
+  <form (submit)="submit()">
+    <div class="d-flex flex-row mb-5">
+    <textarea
+      class="form-control me-2"
+      [(ngModel)]="text1"
+      [ngModelOptions]="{standalone:true}"
+      required
+      rows="3"
+    ></textarea>
+      <textarea
+        class="form-control ms-2"
+        [(ngModel)]="text2"
+        [ngModelOptions]="{standalone:true}"
+        required
+        rows="3"
+      ></textarea>
+    </div>
+    <div class="mb-5">
+      <Button type="submit" class="btn btn-primary" [disabled]="isButtonDisabled()">Submit</Button>
+    </div>
+  </form>
+  <div *ngIf="result">
+    <h3>Text similarity is: {{ result.similarity * 100 }}%</h3>
+  </div>
+  <div class="text-danger mt-3">
+    {{ errorMessage }}
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<div>
+  <h3>Configuration page</h3>
+
+  <div>
+    <form class="mb-5">
+      <div class="form-group mb-2">
+        <label for="token">API Token</label>
+        <input type="text" class="form-control" id="token" name="token" placeholder="API Token" [(ngModel)]="token">
+      </div>
+
+      <div>
+        <button type="submit" class="btn btn-primary me-2" (click)="setToken()">Submit</button>
+        <button class="btn btn-outline-secondary" (click)="clearToken()">Clear</button>
+      </div>
+    </form>
+  </div>
+</div>
